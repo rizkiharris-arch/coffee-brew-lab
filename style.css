@@ -201,10 +201,15 @@ body[data-view="home"] #main-content { padding-inline: 16px; }
 .score-meter span.is-filled { background: var(--caramel); }
 .score-tile.is-overall { margin-top: 4px; border-top: 1px solid var(--line); padding-top: 16px; }
 .notes-text { color: var(--ink-soft); font-size: .9375rem; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
-.compare-selectors { display: grid; grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr); align-items: end; gap: 8px; padding: 16px 12px; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
-.compare-selectors .field label { font-size: .8125rem; }
-.compare-selectors select { padding-left: 8px; padding-right: 4px; }
-.compare-arrow { padding-bottom: 13px; color: var(--coffee); text-align: center; }
+.compare-selectors { display: grid; grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr); align-items: end; column-gap: 8px; padding: 16px 12px; margin-bottom: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+/* Shared rows keep both selects aligned when labels or dates wrap. */
+.compare-selectors .field { display: contents; }
+.compare-selectors .field:first-child > * { grid-column: 1; }
+.compare-selectors .field:last-child > * { grid-column: 3; }
+.compare-selectors .field label { grid-row: 1; font-size: .8125rem; overflow-wrap: anywhere; }
+.compare-selectors select { grid-row: 2; padding-left: 8px; padding-right: 4px; }
+.compare-selectors .field small { grid-row: 3; align-self: start; min-width: 0; overflow-wrap: anywhere; }
+.compare-arrow { grid-column: 2; grid-row: 2; align-self: center; color: var(--coffee); text-align: center; }
 .comparison-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
 .comparison-toolbar .score-hint { flex: 1 1 240px; margin: 0; }
 .comparison-filters { display: flex; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
@@ -277,7 +282,7 @@ noscript { display: block; margin: 20px; color: var(--error); }
   .score-field.is-overall .score-options { max-width: 400px; }
   .detail-actions .button-primary, .detail-actions .button-secondary { flex: 0 1 auto; }
   .detail-grid, .backup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-  .compare-selectors { gap: 16px; padding: 20px; }
+  .compare-selectors { column-gap: 16px; padding: 20px; }
   .comparison-row { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px; padding: 22px 24px; }
   .comparison-row.is-different { padding-left: 21px; }
   .comparison-label { flex-direction: column; align-items: flex-start; justify-content: flex-start; }

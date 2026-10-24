@@ -375,6 +375,8 @@
     const { recipe } = selected();
     const a = recipe.versions.find(version => version.id === $('compare-left').value);
     const b = recipe.versions.find(version => version.id === $('compare-right').value);
+    $('compare-left-date').textContent = a ? formatDate(a.date) : '';
+    $('compare-right-date').textContent = b ? formatDate(b.date) : '';
     if (!a || !b) return;
     const rows = compareVersions(a, b);
     const differences = rows.filter(row => row.different).length;
@@ -388,6 +390,7 @@
   function clearComparison() {
     for (const id of ['compare-left', 'compare-right']) {
       $(id).innerHTML = ''; $(id).value = '';
+      $(id + '-date').textContent = '';
     }
     $('compare-subtitle').textContent = '';
     $('comparison-summary').textContent = '';
@@ -399,7 +402,7 @@
     const { recipe } = selected();
     if (recipe.versions.length < 2) return false;
     $('compare-subtitle').textContent = latest(recipe).name + ' · Yang berubah ditandai.';
-    const options = recipe.versions.map(version => '<option value="' + escape(version.id) + '">V' + version.number + ' · ' + escape(formatDate(version.date)) + '</option>').join('');
+    const options = recipe.versions.map(version => '<option value="' + escape(version.id) + '">V' + version.number + '</option>').join('');
     $('compare-left').innerHTML = options; $('compare-right').innerHTML = options;
     $('compare-left').value = recipe.versions.some(version => version.id === leftId) ? leftId : recipe.versions[Math.max(0, recipe.versions.length - 2)].id;
     $('compare-right').value = recipe.versions.some(version => version.id === rightId) ? rightId : latest(recipe).id;

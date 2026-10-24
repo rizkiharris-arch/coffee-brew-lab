@@ -174,7 +174,11 @@
       <section id="compare-view" class="view" aria-labelledby="compare-title" hidden>
         <button type="button" class="back-button" data-action="detail">← Detail resep</button>
         <div class="page-heading"><div><p class="eyebrow">CEK APA YANG BERUBAH</p><h1 id="compare-title">Perbandingan versi hasil ngulik kopi gw</h1><p class="lede" id="compare-subtitle"></p></div></div>
-        <div class="compare-selectors"><div class="field"><label for="compare-left">Versi pertama</label><select id="compare-left"></select></div><span class="compare-arrow" aria-hidden="true">↔</span><div class="field"><label for="compare-right">Versi pembanding</label><select id="compare-right"></select></div></div>
+        <div class="compare-selectors">
+          <div class="field"><label for="compare-left">Versi pertama</label><select id="compare-left" aria-describedby="compare-left-date"></select><small id="compare-left-date"></small></div>
+          <span class="compare-arrow" aria-hidden="true">↔</span>
+          <div class="field"><label for="compare-right">Versi pembanding</label><select id="compare-right" aria-describedby="compare-right-date"></select><small id="compare-right-date"></small></div>
+        </div>
         <div class="comparison-toolbar">
           <p id="comparison-summary" class="score-hint" aria-live="polite"></p>
           <div class="comparison-filters" role="group" aria-label="Tampilkan atribut perbandingan"><button type="button" data-compare-filter="all" aria-pressed="true">Semua</button><button type="button" data-compare-filter="different" aria-pressed="false">Berbeda</button></div>
