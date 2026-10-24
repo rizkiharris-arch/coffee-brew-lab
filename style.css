@@ -70,6 +70,7 @@ strong { font-weight: 600; }
 .nav-button.is-active { color: var(--coffee); background: var(--surface-muted); font-weight: 650; }
 body[data-view="editor"] .main-nav { display: none; }
 main { min-height: calc(100dvh - 280px); padding-top: 24px; }
+body[data-view="home"] #main-content { padding-inline: 16px; }
 .view { animation: enter-view .18s ease-out; }
 .page-heading { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .page-heading > div { min-width: 0; }
@@ -90,6 +91,7 @@ main { min-height: calc(100dvh - 280px); padding-top: 24px; }
 .hero-grid { margin-bottom: 26px; }
 .summary-card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface-muted); }
 .journal-stat { display: flex; align-items: center; gap: 12px; min-width: 0; }
+#home-view .journal-stat { flex-wrap: wrap; }
 .journal-stat:nth-child(2) { border-left: 1px solid #CBB69C; padding-left: 14px; }
 .stat-number { color: var(--coffee); font-family: var(--display-font); font-size: 2rem; font-weight: 400; line-height: 1; letter-spacing: -.03em; }
 .stat-label { max-width: 76px; color: var(--coffee); font-size: .8125rem; line-height: 1.4; }
