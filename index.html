@@ -2,30 +2,30 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f5ef">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#F6F1E9">
   <meta name="description" content="Jurnal eksperimen kopi pribadi. Catat resep, kenali rasa, dan bandingkan setiap seduhan.">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <title>Coffee Brew Lab — Jurnal Seduhan</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23382b24'/%3E%3Cellipse cx='20' cy='20' rx='8' ry='12' transform='rotate(30 20 20)' fill='%23f5e8d3'/%3E%3Cpath d='M24 10Q15 18 16 30' fill='none' stroke='%23382b24' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23593B2C'/%3E%3Cellipse cx='20' cy='20' rx='8' ry='12' transform='rotate(30 20 20)' fill='%23F6F1E9'/%3E%3Cpath d='M24 10Q15 18 16 30' fill='none' stroke='%23593B2C' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./style.css">
   <script src="./app.js" defer></script>
 </head>
-<body>
+<body data-view="home">
   <a class="skip-link sr-only" href="#main-content">Lewati ke isi</a>
   <div class="app-shell">
     <header class="site-header">
       <a class="brand" href="#resep" aria-label="Coffee Brew Lab, daftar resep">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="13" fill="currentColor"/><ellipse cx="20" cy="20" rx="7" ry="12" transform="rotate(32 20 20)" fill="#F5E8D3"/><path d="M25 11c-10 5-3 12-10 18" stroke="#382B24" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="13" fill="currentColor"/><ellipse cx="20" cy="20" rx="7" ry="12" transform="rotate(32 20 20)" fill="#F6F1E9"/><path d="M25 11c-10 5-3 12-10 18" stroke="#593B2C" stroke-width="2" stroke-linecap="round"/></svg></span>
         <span><span class="brand-title">Coffee Brew Lab<span class="brand-dot">.</span></span><span class="brand-subtitle">Jurnal seduhan pribadi</span></span>
       </a>
-      <span class="header-note"><span class="status-dot" aria-hidden="true"></span> Tersimpan di HP Anda</span>
+      <span class="header-note"><span class="status-dot" aria-hidden="true"></span> Data di browser ini</span>
     </header>
 
     <nav class="main-nav" aria-label="Menu utama">
-      <button type="button" class="nav-button is-active" data-nav="home" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>Resep saya</button>
-      <button type="button" class="nav-button" data-nav="new"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="10"/></svg>Eksperimen baru</button>
-      <button type="button" class="nav-button" data-nav="backup"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>Cadangan</button>
+      <button type="button" class="nav-button is-active" data-nav="home" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg><span>Jurnal</span></button>
+      <button type="button" class="nav-button" data-nav="new"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="10"/></svg><span>Resep baru</span></button>
+      <button type="button" class="nav-button" data-nav="backup"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/></svg><span>Cadangan</span></button>
     </nav>
 
     <main id="main-content" tabindex="-1">
@@ -33,39 +33,41 @@
       <div id="storage-warning" class="notice" data-tone="error" role="alert" hidden></div>
 
       <section id="home-view" class="view" aria-labelledby="home-title">
-        <div class="page-heading">
-          <div><p class="eyebrow">RUANG UNTUK BEREKSPERIMEN</p><h1 id="home-title">Seduh. Catat. Temukan.</h1><p class="lede">Kenali kopi Anda, satu seduhan pada satu waktu.</p></div>
+        <div class="page-heading home-heading">
+          <div><p class="eyebrow">CATATAN DARI CANGKIR ANDA</p><h1 id="home-title">Jurnal seduhan.</h1><p class="lede">Detail kecil. Penemuan rasa baru.</p></div>
           <div class="heading-actions"><button type="button" class="button button-primary" data-action="new"><span aria-hidden="true">＋</span> Resep baru</button></div>
         </div>
         <div class="hero-grid">
-          <article class="intro-card">
-            <div><span class="chip">DARI RASA PENASARAN, JADI RESEP ANDALAN</span><h2>Setiap seduhan<br>punya ceritanya.</h2><p>Simpan detail kecilnya.<br>Temukan perbedaan rasanya.</p></div>
-            <svg class="brew-illustration" viewBox="0 0 230 215" fill="none" aria-hidden="true">
+          <aside class="summary-card" aria-label="Ringkasan jurnal">
+            <div class="journal-stat"><strong class="stat-number" id="recipe-count">0</strong><span class="stat-label">resep tersimpan</span></div>
+            <div class="journal-stat"><strong class="stat-number" id="version-count">0</strong><span class="stat-label">versi eksperimen</span></div>
+            <p class="summary-hint">Satu seduhan, satu penemuan.</p>
+          </aside>
+        </div>
+        <div class="section-heading"><h2>Koleksi resep</h2><span id="collection-caption" class="version-caption">Perjalanan rasa dimulai di sini</span></div>
+        <div id="recipe-list" class="recipe-grid"></div>
+        <div id="empty-state" class="empty-state intro-card">
+          <svg class="brew-illustration" viewBox="0 0 230 215" fill="none" aria-hidden="true">
               <ellipse cx="126" cy="188" rx="85" ry="10" fill="#C9BCA6" opacity=".4"/>
               <path d="M96 26c-8-9 8-11 0-20m23 26c-8-9 8-11 0-20" stroke="#A48365" stroke-width="2" stroke-linecap="round" opacity=".7"/>
               <path d="M80 138h83l-8 43c-1 6-5 9-12 9h-44c-7 0-12-4-13-10l-6-42Z" fill="#F9F6EE" stroke="#514335" stroke-width="2.5"/>
               <path d="M164 145h9c21 0 20 28 0 28h-14" stroke="#514335" stroke-width="3"/>
               <path d="M86 159h72l-4 23c-1 3-4 5-9 5h-44c-6 0-10-2-11-7l-4-21Z" fill="#A36B44"/>
-              <path d="m66 69 110 0-30 63h-49L66 69Z" fill="#D5DBCD" stroke="#514335" stroke-width="2.5" stroke-linejoin="round"/>
-              <path d="m78 72 27 52m-4-52 16 52m8-52 3 52m20-52-10 52m26-52-21 52" stroke="#A5AF99" stroke-width="2"/>
+              <path d="m66 69 110 0-30 63h-49L66 69Z" fill="#D8C6AC" stroke="#514335" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="m78 72 27 52m-4-52 16 52m8-52 3 52m20-52-10 52m26-52-21 52" stroke="#A57B55" stroke-width="2"/>
               <path d="M60 68h122M89 133h67" stroke="#514335" stroke-width="3" stroke-linecap="round"/>
-              <ellipse cx="121" cy="69" rx="55" ry="9" fill="#ECECE0" stroke="#514335" stroke-width="2.5"/>
+              <ellipse cx="121" cy="69" rx="55" ry="9" fill="#F6F1E9" stroke="#514335" stroke-width="2.5"/>
               <ellipse cx="121" cy="69" rx="38" ry="5" fill="#886146"/>
               <path d="M196 32c-23 4-28 14-46 18m47-27-6 20" stroke="#514335" stroke-width="2.5" stroke-linecap="round"/>
               <path d="M145 51c-6 6-10 12-9 16" stroke="#A87954" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
               <ellipse cx="46" cy="161" rx="8" ry="12" transform="rotate(-33 46 161)" fill="#AA7954"/>
               <path d="m41 152 9 18" stroke="#E5C9A9" stroke-width="1.5"/>
             </svg>
-          </article>
-          <aside class="summary-card" aria-label="Ringkasan jurnal"><span class="eyebrow">ISI JURNAL ANDA</span><div><strong class="stat-number" id="recipe-count">0</strong><span class="stat-label">resep tersimpan</span></div><p><span id="version-count">0</span> versi eksperimen<br><span class="summary-hint">Langkah kecil menuju cangkir favorit.</span></p></aside>
+          <p class="eyebrow">MULAI DARI RASA PENASARAN</p><h2>Cangkir pertama,<br>cerita pertama.</h2>
+          <p>Catat resep, kenali karakternya, lalu temukan seduhan favorit Anda.</p>
+          <button type="button" class="button button-primary" data-action="new">Catat seduhan pertama <span aria-hidden="true">↗</span></button>
         </div>
-        <div class="section-heading"><h2>Koleksi resep</h2><span id="collection-caption" class="version-caption">Perjalanan rasa dimulai di sini</span></div>
-        <div id="recipe-list" class="recipe-grid"></div>
-        <div id="empty-state" class="empty-state">
-          <div class="empty-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M10 15h25v13a10 10 0 0 1-10 10h-5a10 10 0 0 1-10-10V15Z" stroke="currentColor" stroke-width="2"/><path d="M35 19h3a6 6 0 0 1 0 12h-4M8 41h29M18 5v5M25 3v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-          <h2>Resep pertama Anda menunggu.</h2><p>V60 pagi ini, cold brew untuk besok, atau racikan baru.<br>Mulai dari apa yang ada di cangkir Anda.</p><button type="button" class="button button-secondary" data-action="new">Catat seduhan pertama <span aria-hidden="true">↗</span></button>
-        </div>
-        <p class="page-footer-note">Catatan hanya tersimpan di browser ini. Cadangkan secara berkala agar cerita seduhan Anda tetap aman.</p>
+        <p class="page-footer-note">Tersimpan di browser ini. Cadangkan jurnal secara berkala.</p>
       </section>
 
       <section id="editor-view" class="view" aria-labelledby="editor-title" hidden>
@@ -98,11 +100,61 @@
             <div class="field"><label for="tasting-notes">Tasting notes</label><textarea id="tasting-notes" name="tastingNotes" rows="4" maxlength="10000" placeholder="Aroma bunga, manis seperti madu, akhir rasa sedikit kering…"></textarea></div>
             <div class="tasting-intro"><h3>Kenali karakter rasanya</h3><p>Semua skor opsional. 1 = rendah, 5 = tinggi.</p></div>
             <div class="score-grid">
-              <div class="score-field"><label for="sweetness">Sweetness<span class="score-description">Kemanisan</span></label><select id="sweetness" name="sweetness" data-score="sweetness"><option value="">Belum dinilai</option></select></div>
-              <div class="score-field"><label for="acidity">Acidity<span class="score-description">Keasaman</span></label><select id="acidity" name="acidity" data-score="acidity"><option value="">Belum dinilai</option></select></div>
-              <div class="score-field"><label for="bitterness">Bitterness<span class="score-description">Kepahitan</span></label><select id="bitterness" name="bitterness" data-score="bitterness"><option value="">Belum dinilai</option></select></div>
-              <div class="score-field"><label for="body">Body<span class="score-description">Berat di mulut</span></label><select id="body" name="body" data-score="body"><option value="">Belum dinilai</option></select></div>
-              <div class="score-field"><label for="overall">Nilai keseluruhan<span class="score-description">Seberapa Anda menyukainya</span></label><select id="overall" name="overall" data-score="overall"><option value="">Belum dinilai</option></select></div>
+              <fieldset class="score-field" id="sweetness" data-score-group="sweetness">
+                <legend id="sweetness-label">Sweetness<span class="score-description">Kemanisan</span></legend>
+                <div class="score-options">
+                  <label class="score-choice"><input type="radio" name="sweetness" value="1" aria-label="1 dari 5"><span>1</span></label>
+                  <label class="score-choice"><input type="radio" name="sweetness" value="2" aria-label="2 dari 5"><span>2</span></label>
+                  <label class="score-choice"><input type="radio" name="sweetness" value="3" aria-label="3 dari 5"><span>3</span></label>
+                  <label class="score-choice"><input type="radio" name="sweetness" value="4" aria-label="4 dari 5"><span>4</span></label>
+                  <label class="score-choice"><input type="radio" name="sweetness" value="5" aria-label="5 dari 5"><span>5</span></label>
+                  <label class="score-reset"><input type="radio" name="sweetness" value="" checked><span>Belum dinilai</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="score-field" id="acidity" data-score-group="acidity">
+                <legend id="acidity-label">Acidity<span class="score-description">Keasaman</span></legend>
+                <div class="score-options">
+                  <label class="score-choice"><input type="radio" name="acidity" value="1" aria-label="1 dari 5"><span>1</span></label>
+                  <label class="score-choice"><input type="radio" name="acidity" value="2" aria-label="2 dari 5"><span>2</span></label>
+                  <label class="score-choice"><input type="radio" name="acidity" value="3" aria-label="3 dari 5"><span>3</span></label>
+                  <label class="score-choice"><input type="radio" name="acidity" value="4" aria-label="4 dari 5"><span>4</span></label>
+                  <label class="score-choice"><input type="radio" name="acidity" value="5" aria-label="5 dari 5"><span>5</span></label>
+                  <label class="score-reset"><input type="radio" name="acidity" value="" checked><span>Belum dinilai</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="score-field" id="bitterness" data-score-group="bitterness">
+                <legend id="bitterness-label">Bitterness<span class="score-description">Kepahitan</span></legend>
+                <div class="score-options">
+                  <label class="score-choice"><input type="radio" name="bitterness" value="1" aria-label="1 dari 5"><span>1</span></label>
+                  <label class="score-choice"><input type="radio" name="bitterness" value="2" aria-label="2 dari 5"><span>2</span></label>
+                  <label class="score-choice"><input type="radio" name="bitterness" value="3" aria-label="3 dari 5"><span>3</span></label>
+                  <label class="score-choice"><input type="radio" name="bitterness" value="4" aria-label="4 dari 5"><span>4</span></label>
+                  <label class="score-choice"><input type="radio" name="bitterness" value="5" aria-label="5 dari 5"><span>5</span></label>
+                  <label class="score-reset"><input type="radio" name="bitterness" value="" checked><span>Belum dinilai</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="score-field" id="body" data-score-group="body">
+                <legend id="body-label">Body<span class="score-description">Berat di mulut</span></legend>
+                <div class="score-options">
+                  <label class="score-choice"><input type="radio" name="body" value="1" aria-label="1 dari 5"><span>1</span></label>
+                  <label class="score-choice"><input type="radio" name="body" value="2" aria-label="2 dari 5"><span>2</span></label>
+                  <label class="score-choice"><input type="radio" name="body" value="3" aria-label="3 dari 5"><span>3</span></label>
+                  <label class="score-choice"><input type="radio" name="body" value="4" aria-label="4 dari 5"><span>4</span></label>
+                  <label class="score-choice"><input type="radio" name="body" value="5" aria-label="5 dari 5"><span>5</span></label>
+                  <label class="score-reset"><input type="radio" name="body" value="" checked><span>Belum dinilai</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="score-field is-overall" id="overall" data-score-group="overall">
+                <legend id="overall-label">Nilai keseluruhan<span class="score-description">Seberapa Anda menyukainya</span></legend>
+                <div class="score-options">
+                  <label class="score-choice"><input type="radio" name="overall" value="1" aria-label="1 dari 5"><span>1</span></label>
+                  <label class="score-choice"><input type="radio" name="overall" value="2" aria-label="2 dari 5"><span>2</span></label>
+                  <label class="score-choice"><input type="radio" name="overall" value="3" aria-label="3 dari 5"><span>3</span></label>
+                  <label class="score-choice"><input type="radio" name="overall" value="4" aria-label="4 dari 5"><span>4</span></label>
+                  <label class="score-choice"><input type="radio" name="overall" value="5" aria-label="5 dari 5"><span>5</span></label>
+                  <label class="score-reset"><input type="radio" name="overall" value="" checked><span>Belum dinilai</span></label>
+                </div>
+              </fieldset>
             </div><p class="score-hint">Skor karakter tidak otomatis dirata-ratakan menjadi nilai keseluruhan.</p>
           </section>
           <div class="form-actions"><button type="button" class="button button-secondary" data-action="back">Batal</button><button type="submit" class="button button-primary" id="save-button">Simpan eksperimen</button></div>
@@ -113,6 +165,7 @@
         <button type="button" class="back-button" data-nav="home">← Koleksi resep</button>
         <div class="page-heading detail-top"><div><p class="eyebrow">CATATAN SEDUHAN</p><h1 id="detail-title"></h1><p class="lede" id="detail-subtitle"></p></div><span class="method-badge" id="detail-method"></span></div>
         <div class="detail-actions"><button type="button" class="button button-primary" id="duplicate-button">＋ Buat versi berikutnya</button><button type="button" class="button button-secondary" id="edit-button">Ubah versi ini</button><button type="button" class="button button-secondary" id="compare-button">Bandingkan versi</button></div>
+        <p id="compare-help" class="score-hint" hidden>Buat minimal dua versi untuk membandingkan.</p>
         <div class="section-heading"><h2>Riwayat eksperimen</h2><span class="version-caption">Pilih versi untuk melihat detailnya</span></div>
         <div id="version-tabs" class="version-tabs" role="group" aria-label="Versi eksperimen"></div>
         <div id="detail-content"></div>
@@ -122,11 +175,16 @@
         <button type="button" class="back-button" data-action="detail">← Detail resep</button>
         <div class="page-heading"><div><p class="eyebrow">TEMUKAN PERBEDAANNYA</p><h1 id="compare-title">Dua versi, cerita berbeda.</h1><p class="lede" id="compare-subtitle"></p></div></div>
         <div class="compare-selectors"><div class="field"><label for="compare-left">Versi pertama</label><select id="compare-left"></select></div><span class="compare-arrow" aria-hidden="true">↔</span><div class="field"><label for="compare-right">Versi pembanding</label><select id="compare-right"></select></div></div>
-        <p id="comparison-summary" class="score-hint" aria-live="polite"></p><div id="comparison-list" class="comparison-list"></div>
+        <div class="comparison-toolbar">
+          <p id="comparison-summary" class="score-hint" aria-live="polite"></p>
+          <div class="comparison-filters" role="group" aria-label="Tampilkan atribut perbandingan"><button type="button" data-compare-filter="all" aria-pressed="true">Semua</button><button type="button" data-compare-filter="different" aria-pressed="false">Berbeda</button></div>
+        </div>
+        <div id="comparison-list" class="comparison-list"></div>
+        <p id="comparison-empty" class="notice" role="status" hidden>Tidak ada atribut berbeda untuk ditampilkan.</p>
       </section>
 
       <section id="backup-view" class="view" aria-labelledby="backup-title" hidden>
-        <div class="page-heading"><div><p class="eyebrow">JAGA CATATAN ANDA</p><h1 id="backup-title">Seduhan boleh habis.<br>Catatannya jangan.</h1><p class="lede">Simpan salinan jurnal agar perjalanan rasa Anda tetap aman.</p></div></div>
+        <div class="page-heading"><div><p class="eyebrow">JAGA CATATAN ANDA</p><h1 id="backup-title">Jaga cerita<br>seduhan Anda.</h1><p class="lede">Simpan salinan jurnal agar perjalanan rasa Anda tetap aman.</p></div></div>
         <div class="backup-grid">
           <section class="backup-card" aria-labelledby="export-title"><div class="backup-icon" aria-hidden="true">↧</div><h2 id="export-title">Cadangkan jurnal</h2><p>Unduh seluruh resep, versi, dan skor tasting dalam satu file JSON. Tidak perlu mengedit isi file.</p><p id="backup-count" class="chip"></p><button type="button" id="export-button" class="button button-primary">Unduh cadangan JSON</button><p id="last-backup" class="last-backup"></p><button type="button" id="export-raw-button" class="button button-secondary" hidden>Unduh data yang tidak terbaca</button></section>
           <section class="backup-card" aria-labelledby="import-title"><div class="backup-icon" aria-hidden="true">↥</div><h2 id="import-title">Pulihkan dari file</h2><p>Pilih cadangan Coffee Brew Lab dari HP. Pemulihan akan mengganti seluruh catatan saat ini setelah Anda mengonfirmasi.</p><div class="field file-input"><label for="import-file">Pilih file cadangan (.json)</label><input id="import-file" type="file" accept=".json,application/json"></div><div id="import-summary" class="import-summary" role="status" aria-live="polite" hidden></div><button type="button" id="restore-button" class="button button-secondary" disabled>Pulihkan cadangan</button></section>
