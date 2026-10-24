@@ -35,6 +35,11 @@ button { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: .55; }
 button, input, select, textarea { border-radius: 0; }
 :where(button, a, input, select, textarea, [tabindex]):focus-visible { outline: 3px solid var(--coffee); outline-offset: 4px; }
+/* Navigation focuses main; keep the journal frame quiet and inside its bounds. */
+body[data-view="home"] #main-content:focus-visible {
+  outline: 1px solid var(--line);
+  outline-offset: -1px;
+}
 ::selection { color: var(--ink); background: var(--beige); }
 [hidden] { display: none !important; }
 svg, img { display: block; max-width: 100%; }
