@@ -34,17 +34,17 @@
 
       <section id="home-view" class="view" aria-labelledby="home-title">
         <div class="page-heading home-heading">
-          <div><p class="eyebrow">CATATAN DARI CANGKIR ANDA</p><h1 id="home-title">Jurnal seduhan.</h1><p class="lede">Detail kecil. Penemuan rasa baru.</p></div>
+          <div><p class="eyebrow">CATATAN DARI HASIL NGULIK RESEP KOPI</p><h1 id="home-title">Jurnal seduhan.</h1><p class="lede">Racik, catat, coba lagi.</p></div>
           <div class="heading-actions"><button type="button" class="button button-primary" data-action="new"><span aria-hidden="true">＋</span> Resep baru</button></div>
         </div>
         <div class="hero-grid">
           <aside class="summary-card" aria-label="Ringkasan jurnal">
             <div class="journal-stat"><strong class="stat-number" id="recipe-count">0</strong><span class="stat-label">resep tersimpan</span></div>
             <div class="journal-stat"><strong class="stat-number" id="version-count">0</strong><span class="stat-label">versi eksperimen</span></div>
-            <p class="summary-hint">Satu seduhan, satu penemuan.</p>
+            <p class="summary-hint">Sedikit catatan, banyak bahan ngulik.</p>
           </aside>
         </div>
-        <div class="section-heading"><h2>Koleksi resep</h2><span id="collection-caption" class="version-caption">Perjalanan rasa dimulai di sini</span></div>
+        <div class="section-heading"><h2>Koleksi resep</h2><span id="collection-caption" class="version-caption">Mulai dari satu resep dulu</span></div>
         <div id="recipe-list" class="recipe-grid"></div>
         <div id="empty-state" class="empty-state intro-card">
           <svg class="brew-illustration" viewBox="0 0 230 215" fill="none" aria-hidden="true">
@@ -63,19 +63,19 @@
               <ellipse cx="46" cy="161" rx="8" ry="12" transform="rotate(-33 46 161)" fill="#AA7954"/>
               <path d="m41 152 9 18" stroke="#E5C9A9" stroke-width="1.5"/>
             </svg>
-          <p class="eyebrow">MULAI DARI RASA PENASARAN</p><h2>Cangkir pertama,<br>cerita pertama.</h2>
-          <p>Catat resep, kenali karakternya, lalu temukan seduhan favorit Anda.</p>
-          <button type="button" class="button button-primary" data-action="new">Catat seduhan pertama <span aria-hidden="true">↗</span></button>
+          <p class="eyebrow">MULAI NGULIK</p><h2>Mulai dari<br>seduhan hari ini.</h2>
+          <p>Catat racikannya, kenali rasanya, lalu coba lagi sampai ketemu yang pas.</p>
+          <button type="button" class="button button-primary" data-action="new">Catat resep pertama <span aria-hidden="true">↗</span></button>
         </div>
-        <p class="page-footer-note">Tersimpan di browser ini. Cadangkan jurnal secara berkala.</p>
+        <p class="page-footer-note">Catatan cuma ada di browser ini. Sesekali unduh cadangan, ya.</p>
       </section>
 
       <section id="editor-view" class="view" aria-labelledby="editor-title" hidden>
         <button type="button" class="back-button" data-action="back">← Kembali</button>
-        <div class="page-heading"><div><p class="eyebrow" id="editor-eyebrow">EKSPERIMEN PERTAMA</p><h1 id="editor-title">Catat seduhan baru.</h1><p class="lede">Isi yang Anda tahu. Detail lainnya bisa menyusul.</p></div><span class="version-badge" id="editor-version">V1</span></div>
+        <div class="page-heading"><div><p class="eyebrow" id="editor-eyebrow">MULAI NGULIK</p><h1 id="editor-title">Catat hasil seduhan.</h1><p class="lede">Isi yang sudah ada dulu. Detail lain bisa nyusul.</p></div><span class="version-badge" id="editor-version">V1</span></div>
         <form id="recipe-form" novalidate>
           <p id="form-error" class="notice form-error" data-tone="error" role="alert" hidden></p>
-          <section class="form-section" aria-labelledby="identity-heading"><div class="section-title"><span class="section-number">01</span><div><h2 id="identity-heading">Kenali seduhannya</h2><p>Nama dan kategori wajib diisi. Sisanya opsional.</p></div></div>
+          <section class="form-section" aria-labelledby="identity-heading"><div class="section-title"><span class="section-number">01</span><div><h2 id="identity-heading">Kenalan sama resepnya</h2><p>Nama dan kategori wajib diisi. Yang lain boleh nyusul.</p></div></div>
             <div class="form-grid">
               <div class="field field-wide"><label for="recipe-name">Nama resep <span aria-hidden="true">*</span></label><input id="recipe-name" name="name" type="text" required maxlength="120" placeholder="Misalnya: V60 Ethiopia pagi hari" autocomplete="off"></div>
               <div class="field"><label for="category">Kategori <span aria-hidden="true">*</span></label><select id="category" name="category" required><option value="">Pilih kategori</option><option value="manual">Manual brew</option><option value="cold">Cold brew</option><option value="other">Lainnya</option></select></div>
@@ -84,21 +84,21 @@
               <div class="field"><label for="beans">Biji kopi</label><input id="beans" name="beans" type="text" maxlength="200" placeholder="Origin, roaster, atau nama kopi"></div>
             </div>
           </section>
-          <section class="form-section" aria-labelledby="parameters-heading"><div class="section-title"><span class="section-number">02</span><div><h2 id="parameters-heading">Detail seduhan</h2><p>Perubahan kecil bisa membawa rasa yang berbeda.</p></div></div>
+          <section class="form-section" aria-labelledby="parameters-heading"><div class="section-title"><span class="section-number">02</span><div><h2 id="parameters-heading">Detail seduhan</h2><p>Ubah sedikit, cek bedanya di cangkir.</p></div></div>
             <div class="form-grid">
               <div class="field"><label for="coffee-grams">Dosis kopi (g)</label><input id="coffee-grams" name="coffeeGrams" type="text" inputmode="decimal" maxlength="20" placeholder="15"></div>
               <div class="field"><label for="water-ml">Air seduh (ml)</label><input id="water-ml" name="waterMl" type="text" inputmode="decimal" maxlength="20" placeholder="225"></div>
-              <div class="ratio-preview field-wide" id="ratio-preview" aria-live="polite">Rasio kopi : air akan muncul saat dosis dan air terisi.</div>
+              <div class="ratio-preview field-wide" id="ratio-preview" aria-live="polite">Isi dosis kopi dan air buat lihat rasio.</div>
               <div class="field"><label for="temperature">Suhu air (°C)</label><input id="temperature" name="temperatureC" type="text" inputmode="decimal" maxlength="20" placeholder="92"></div>
               <div class="field"><label for="grind">Ukuran giling</label><input id="grind" name="grind" type="text" maxlength="200" placeholder="Medium, 20 klik…"></div>
-              <div class="field field-wide"><span class="field-label" id="duration-label">Durasi seduh</span><div class="duration-grid" role="group" aria-labelledby="duration-label"><div><label for="duration-hours">Jam</label><input id="duration-hours" name="hours" type="number" inputmode="numeric" min="0" step="1" placeholder="0"></div><div><label for="duration-minutes">Menit</label><input id="duration-minutes" name="minutes" type="number" inputmode="numeric" min="0" max="59" step="1" placeholder="0"></div><div><label for="duration-seconds">Detik</label><input id="duration-seconds" name="seconds" type="number" inputmode="numeric" min="0" max="59" step="1" placeholder="0"></div></div><small>Untuk cold brew 12 jam, isi 12 pada kolom Jam.</small></div>
+              <div class="field field-wide"><span class="field-label" id="duration-label">Durasi seduh</span><div class="duration-grid" role="group" aria-labelledby="duration-label"><div><label for="duration-hours">Jam</label><input id="duration-hours" name="hours" type="number" inputmode="numeric" min="0" step="1" placeholder="0"></div><div><label for="duration-minutes">Menit</label><input id="duration-minutes" name="minutes" type="number" inputmode="numeric" min="0" max="59" step="1" placeholder="0"></div><div><label for="duration-seconds">Detik</label><input id="duration-seconds" name="seconds" type="number" inputmode="numeric" min="0" max="59" step="1" placeholder="0"></div></div><small>Buat cold brew 12 jam, isi 12 di kolom Jam.</small></div>
               <div class="field field-wide"><label for="process">Langkah / catatan proses</label><textarea id="process" name="process" rows="3" maxlength="10000" placeholder="Blooming 30 detik, lalu tuang perlahan…"></textarea></div>
               <div class="field field-wide"><label for="ingredients">Bahan tambahan</label><textarea id="ingredients" name="ingredients" rows="2" maxlength="10000" placeholder="Misalnya: susu 100 ml, es 80 g (tidak dihitung dalam rasio)"></textarea></div>
             </div>
           </section>
-          <section class="form-section" aria-labelledby="tasting-heading"><div class="section-title"><span class="section-number">03</span><div><h2 id="tasting-heading">Apa yang Anda rasakan?</h2><p>Tidak ada jawaban salah. Gunakan kata-kata Anda sendiri.</p></div></div>
+          <section class="form-section" aria-labelledby="tasting-heading"><div class="section-title"><span class="section-number">03</span><div><h2 id="tasting-heading">Apa yang gw rasakan?</h2><p>Tulis aja rasa yang muncul. Nggak harus pakai istilah khusus.</p></div></div>
             <div class="field"><label for="tasting-notes">Tasting notes</label><textarea id="tasting-notes" name="tastingNotes" rows="4" maxlength="10000" placeholder="Aroma bunga, manis seperti madu, akhir rasa sedikit kering…"></textarea></div>
-            <div class="tasting-intro"><h3>Kenali karakter rasanya</h3><p>Semua skor opsional. 1 = rendah, 5 = tinggi.</p></div>
+            <div class="tasting-intro"><h3>Rasanya kayak apa?</h3><p>Boleh dikosongkan. 1 = rendah, 5 = tinggi.</p></div>
             <div class="score-grid">
               <fieldset class="score-field" id="sweetness" data-score-group="sweetness">
                 <legend id="sweetness-label">Sweetness<span class="score-description">Kemanisan</span></legend>
@@ -145,7 +145,7 @@
                 </div>
               </fieldset>
               <fieldset class="score-field is-overall" id="overall" data-score-group="overall">
-                <legend id="overall-label">Nilai keseluruhan<span class="score-description">Seberapa Anda menyukainya</span></legend>
+                <legend id="overall-label">Nilai keseluruhan<span class="score-description">Seberapa cocok di lidah gw</span></legend>
                 <div class="score-options">
                   <label class="score-choice"><input type="radio" name="overall" value="1" aria-label="1 dari 5"><span>1</span></label>
                   <label class="score-choice"><input type="radio" name="overall" value="2" aria-label="2 dari 5"><span>2</span></label>
@@ -155,44 +155,44 @@
                   <label class="score-reset"><input type="radio" name="overall" value="" checked><span>Belum dinilai</span></label>
                 </div>
               </fieldset>
-            </div><p class="score-hint">Skor karakter tidak otomatis dirata-ratakan menjadi nilai keseluruhan.</p>
+            </div><p class="score-hint">Skor karakter nggak dirata-ratakan. Nilai keseluruhan diisi sendiri.</p>
           </section>
-          <div class="form-actions"><button type="button" class="button button-secondary" data-action="back">Batal</button><button type="submit" class="button button-primary" id="save-button">Simpan eksperimen</button></div>
+          <div class="form-actions"><button type="button" class="button button-secondary" data-action="back">Batal</button><button type="submit" class="button button-primary" id="save-button">Simpan catatan</button></div>
         </form>
       </section>
 
       <section id="detail-view" class="view" aria-labelledby="detail-title" hidden>
         <button type="button" class="back-button" data-nav="home">← Koleksi resep</button>
         <div class="page-heading detail-top"><div><p class="eyebrow">CATATAN SEDUHAN</p><h1 id="detail-title"></h1><p class="lede" id="detail-subtitle"></p></div><span class="method-badge" id="detail-method"></span></div>
-        <div class="detail-actions"><button type="button" class="button button-primary" id="duplicate-button">＋ Buat versi berikutnya</button><button type="button" class="button button-secondary" id="edit-button">Ubah versi ini</button><button type="button" class="button button-secondary" id="compare-button">Bandingkan versi</button></div>
-        <p id="compare-help" class="score-hint" hidden>Buat minimal dua versi untuk membandingkan.</p>
-        <div class="section-heading"><h2>Riwayat eksperimen</h2><span class="version-caption">Pilih versi untuk melihat detailnya</span></div>
+        <div class="detail-actions"><button type="button" class="button button-primary" id="duplicate-button">＋ Coba versi baru</button><button type="button" class="button button-secondary" id="edit-button">Edit versi ini</button><button type="button" class="button button-secondary" id="compare-button">Bandingkan versi</button></div>
+        <p id="compare-help" class="score-hint" hidden>Bikin satu versi lagi biar bisa dibandingkan.</p>
+        <div class="section-heading"><h2>Riwayat versi</h2><span class="version-caption">Pilih versi buat lihat catatannya</span></div>
         <div id="version-tabs" class="version-tabs" role="group" aria-label="Versi eksperimen"></div>
         <div id="detail-content"></div>
       </section>
 
       <section id="compare-view" class="view" aria-labelledby="compare-title" hidden>
         <button type="button" class="back-button" data-action="detail">← Detail resep</button>
-        <div class="page-heading"><div><p class="eyebrow">TEMUKAN PERBEDAANNYA</p><h1 id="compare-title">Dua versi, cerita berbeda.</h1><p class="lede" id="compare-subtitle"></p></div></div>
+        <div class="page-heading"><div><p class="eyebrow">CEK APA YANG BERUBAH</p><h1 id="compare-title">Perbandingan versi hasil ngulik kopi gw</h1><p class="lede" id="compare-subtitle"></p></div></div>
         <div class="compare-selectors"><div class="field"><label for="compare-left">Versi pertama</label><select id="compare-left"></select></div><span class="compare-arrow" aria-hidden="true">↔</span><div class="field"><label for="compare-right">Versi pembanding</label><select id="compare-right"></select></div></div>
         <div class="comparison-toolbar">
           <p id="comparison-summary" class="score-hint" aria-live="polite"></p>
           <div class="comparison-filters" role="group" aria-label="Tampilkan atribut perbandingan"><button type="button" data-compare-filter="all" aria-pressed="true">Semua</button><button type="button" data-compare-filter="different" aria-pressed="false">Berbeda</button></div>
         </div>
         <div id="comparison-list" class="comparison-list"></div>
-        <p id="comparison-empty" class="notice" role="status" hidden>Tidak ada atribut berbeda untuk ditampilkan.</p>
+        <p id="comparison-empty" class="notice" role="status" hidden>Nggak ada perbedaan untuk ditampilkan.</p>
       </section>
 
       <section id="backup-view" class="view" aria-labelledby="backup-title" hidden>
-        <div class="page-heading"><div><p class="eyebrow">JAGA CATATAN ANDA</p><h1 id="backup-title">Jaga cerita<br>seduhan Anda.</h1><p class="lede">Simpan salinan jurnal agar perjalanan rasa Anda tetap aman.</p></div></div>
+        <div class="page-heading"><div><p class="eyebrow">BIAR CATATAN NGGAK HILANG</p><h1 id="backup-title">Simpan jejak<br>ngulik kopi gw.</h1><p class="lede">Bikin salinan jurnal, biar hasil ngulik nggak hilang.</p></div></div>
         <div class="backup-grid">
-          <section class="backup-card" aria-labelledby="export-title"><div class="backup-icon" aria-hidden="true">↧</div><h2 id="export-title">Cadangkan jurnal</h2><p>Unduh seluruh resep, versi, dan skor tasting dalam satu file JSON. Tidak perlu mengedit isi file.</p><p id="backup-count" class="chip"></p><button type="button" id="export-button" class="button button-primary">Unduh cadangan JSON</button><p id="last-backup" class="last-backup"></p><button type="button" id="export-raw-button" class="button button-secondary" hidden>Unduh data yang tidak terbaca</button></section>
-          <section class="backup-card" aria-labelledby="import-title"><div class="backup-icon" aria-hidden="true">↥</div><h2 id="import-title">Pulihkan dari file</h2><p>Pilih cadangan Coffee Brew Lab dari HP. Pemulihan akan mengganti seluruh catatan saat ini setelah Anda mengonfirmasi.</p><div class="field file-input"><label for="import-file">Pilih file cadangan (.json)</label><input id="import-file" type="file" accept=".json,application/json"></div><div id="import-summary" class="import-summary" role="status" aria-live="polite" hidden></div><button type="button" id="restore-button" class="button button-secondary" disabled>Pulihkan cadangan</button></section>
+          <section class="backup-card" aria-labelledby="export-title"><div class="backup-icon" aria-hidden="true">↧</div><h2 id="export-title">Simpan salinan jurnal</h2><p>Semua resep, versi, dan skor tasting masuk ke satu file JSON. Simpan file ini sebagai cadangan.</p><p id="backup-count" class="chip"></p><button type="button" id="export-button" class="button button-primary">Unduh cadangan JSON</button><p id="last-backup" class="last-backup"></p><button type="button" id="export-raw-button" class="button button-secondary" hidden>Unduh data yang tidak terbaca</button></section>
+          <section class="backup-card" aria-labelledby="import-title"><div class="backup-icon" aria-hidden="true">↥</div><h2 id="import-title">Pulihkan dari file</h2><p>Pilih file cadangan dari HP. Setelah dikonfirmasi, seluruh catatan saat ini akan diganti dengan isi file itu.</p><div class="field file-input"><label for="import-file">Pilih file cadangan (.json)</label><input id="import-file" type="file" accept=".json,application/json"></div><div id="import-summary" class="import-summary" role="status" aria-live="polite" hidden></div><button type="button" id="restore-button" class="button button-secondary" disabled>Pulihkan cadangan</button></section>
         </div>
-        <aside class="privacy-note"><h2>Catatan Anda tinggal di browser ini.</h2><p>Menghapus data situs, memakai mode samaran, atau berganti browser dapat membuat catatan tidak tersedia. Gunakan Chrome biasa dan alamat situs yang sama. Simpan juga salinan cadangan di tempat lain yang Anda pilih.</p><p>Cadangkan setelah eksperimen penting dan sebelum memperbarui aplikasi. File cadangan berisi catatan pribadi; simpan terpisah dari berkas aplikasi publik.</p></aside>
+        <aside class="privacy-note"><h2>Catatan ini cuma ada di browser ini.</h2><p>Catatan bisa hilang kalau data situs dihapus atau memakai mode samaran. Di browser atau alamat situs lain, catatan ini nggak ikut pindah. Pakai Chrome biasa dan simpan file cadangan di tempat lain.</p><p>Unduh cadangan setelah ngulik resep penting atau sebelum update aplikasi. Isinya catatan pribadi, jadi simpan terpisah dari file aplikasi yang dibagikan.</p></aside>
       </section>
     </main>
-    <footer class="site-footer"><span>Coffee Brew Lab<span class="brand-dot">.</span></span><span>Dibuat untuk rasa penasaran Anda.</span></footer>
+    <footer class="site-footer"><span>Coffee Brew Lab<span class="brand-dot">.</span></span><span>Tempat gw ngulik kopi.</span></footer>
   </div>
   <dialog id="confirm-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description"><div class="dialog-content"><p class="eyebrow">COFFEE BREW LAB</p><h2 id="dialog-title"></h2><p id="dialog-description"></p><div class="dialog-actions"><button type="button" id="dialog-cancel" class="button button-secondary">Batal</button><button type="button" id="dialog-confirm" class="button button-primary">Lanjutkan</button></div></div></dialog>
   <noscript>Aplikasi ini memerlukan JavaScript. Aktifkan JavaScript di Chrome untuk mencatat seduhan.</noscript>

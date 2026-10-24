@@ -36,10 +36,10 @@
     if (typeof input.id !== 'string' || !input.id.trim() || input.id.length > 200) fail('Identitas versi tidak valid.');
     if (!Number.isSafeInteger(input.number) || input.number < 1) fail('Nomor versi tidak valid.');
     const name = textValue(input.name, 'Nama resep', 120).trim();
-    if (!name) fail('Isi nama resep terlebih dahulu.', 'recipe-name');
-    if (!Object.hasOwn(CATEGORIES, input.category)) fail('Pilih kategori seduhan.', 'category');
+    if (!name) fail('Isi nama resep dulu.', 'recipe-name');
+    if (!Object.hasOwn(CATEGORIES, input.category)) fail('Pilih dulu kategori seduhannya.', 'category');
     const date = textValue(input.date, 'Tanggal', 10);
-    if (date && !dateValid(date)) fail('Tanggal seduh tidak valid.', 'brew-date');
+    if (date && !dateValid(date)) fail('Tanggal seduhnya belum valid. Cek lagi, ya.', 'brew-date');
     if (input.scores !== undefined && !isObject(input.scores)) fail('Format skor tasting tidak valid.');
     const scores = {};
     for (const key of Object.keys(SCORE_LABELS)) {
@@ -64,7 +64,7 @@
 
   function normalizeData(input) {
     if (!isObject(input) || input.schemaVersion !== 1 || !Array.isArray(input.recipes)) {
-      fail('Format cadangan tidak dikenali. Gunakan file JSON Coffee Brew Lab dengan versi format 1.');
+      fail('Format cadangan ini belum dikenali. Pakai file JSON Coffee Brew Lab dengan versi format 1.');
     }
     if (input.app !== undefined && input.app !== 'Coffee Brew Lab') fail('File ini bukan cadangan Coffee Brew Lab.');
     const ids = new Set();
@@ -86,7 +86,7 @@
 
   function parseBackup(text) {
     let parsed;
-    try { parsed = JSON.parse(text); } catch { fail('File tidak dapat dibaca sebagai JSON. Pilih cadangan Coffee Brew Lab yang utuh.'); }
+    try { parsed = JSON.parse(text); } catch { fail('File ini nggak bisa dibaca sebagai JSON. Pilih file cadangan Coffee Brew Lab yang utuh.'); }
     return normalizeData(parsed);
   }
   function serializeBackup(data, now = new Date().toISOString()) {
@@ -101,7 +101,7 @@
   function findVersion(data, recipeId, versionId) {
     const recipe = data.recipes.find(item => item.id === recipeId);
     const version = recipe && recipe.versions.find(item => item.id === versionId);
-    if (!version) fail('Versi ini tidak ditemukan. Buka kembali resep dari koleksi.');
+    if (!version) fail('Versi ini nggak ketemu. Buka lagi resepnya dari koleksi.');
     return { recipe, version };
   }
   function duplicateVersion(data, recipeId, versionId, fields = {}) {
@@ -119,7 +119,7 @@
   function parseDecimal(input, label = 'Nilai', options = {}) {
     const text = String(input === undefined || input === null ? '' : input).trim();
     if (!text) return null;
-    if (!/^(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(text)) fail(label + ' harus berupa angka yang valid. Gunakan koma atau titik untuk desimal.');
+    if (!/^(?:\d+(?:[.,]\d+)?|[.,]\d+)$/.test(text)) fail(label + ' perlu diisi angka. Koma atau titik boleh dipakai untuk desimal.');
     const value = Number(text.replace(',', '.'));
     return numericValue(value, label, Boolean(options.positive));
   }
@@ -190,20 +190,20 @@
     } catch (error) {
       state.storageProblem = true;
       state.corruptRaw = state.raw;
-      $('storage-warning').textContent = 'Catatan tidak dapat dibaca. Data lama belum diubah. Buka Cadangan untuk menyimpan salinan data yang tidak terbaca, atau pulihkan file cadangan yang valid. ' + (state.raw === null ? 'Periksa izin penyimpanan situs di Chrome.' : '');
+      $('storage-warning').textContent = 'Catatan belum bisa dibaca. Data lama belum diubah. Buka Cadangan untuk mengunduh data yang belum terbaca, atau pulihkan file cadangan yang valid. ' + (state.raw === null ? 'Cek izin penyimpanan situs di Chrome.' : '');
       $('storage-warning').hidden = false;
     }
   }
   function persist(next, restoring = false) {
     const clean = normalizeData(next);
-    if (state.storageProblem && !restoring) fail('Penyimpanan belum dapat dibaca. Isian Anda tetap ada. Pulihkan cadangan yang valid atau periksa izin penyimpanan situs terlebih dahulu.');
+    if (state.storageProblem && !restoring) fail('Penyimpanan belum bisa dibaca. Isian di sini tetap ada. Pulihkan cadangan yang valid atau cek izin penyimpanan situs di Chrome.');
     let current;
     try { current = root.localStorage.getItem(STORAGE_KEY); }
-    catch { fail('Penyimpanan browser tidak dapat diakses. Isian tetap ada; periksa izin penyimpanan situs di Chrome.'); }
-    if (!restoring && current !== state.raw) fail('Catatan telah berubah di tab lain. Isian Anda tetap ada. Salin catatan baru Anda sebelum memuat ulang halaman, lalu buka kembali versi terbaru.');
+    catch { fail('Penyimpanan browser belum bisa diakses. Isian di sini tetap ada. Cek izin penyimpanan situs di Chrome.'); }
+    if (!restoring && current !== state.raw) fail('Catatan berubah di tab lain. Isian di sini tetap ada. Salin dulu isian yang belum disimpan, lalu muat ulang halaman untuk membuka data terbaru.');
     const serialized = JSON.stringify(clean);
     try { root.localStorage.setItem(STORAGE_KEY, serialized); }
-    catch { fail('Catatan belum tersimpan. Penyimpanan browser mungkin penuh atau diblokir. Isian tetap ada; periksa ruang HP dan izin penyimpanan situs.'); }
+    catch { fail('Catatan belum tersimpan. Penyimpanan browser mungkin penuh atau diblokir. Isian di sini tetap ada. Cek ruang HP dan izin penyimpanan situs.'); }
     state.data = clean; state.raw = serialized; state.storageProblem = false; state.corruptRaw = null;
     $('storage-warning').hidden = true;
     return clean;
@@ -231,7 +231,7 @@
   }
   async function canLeave() {
     if (!state.dirty) return true;
-    const allowed = await ask('Tinggalkan isian ini?', 'Perubahan di formulir belum disimpan. Jika kembali sekarang, perubahan ini akan dibuang.', 'Buang perubahan');
+    const allowed = await ask('Keluar tanpa menyimpan?', 'Catatan ini belum disimpan. Kalau keluar sekarang, perubahan akan dibuang.', 'Buang perubahan');
     if (allowed) state.dirty = false;
     return allowed;
   }
@@ -342,7 +342,7 @@
     const recipes = [...state.data.recipes].reverse();
     $('recipe-count').textContent = recipes.length;
     $('version-count').textContent = countVersions(state.data);
-    $('collection-caption').textContent = recipes.length ? recipes.length + ' resep · ' + countVersions(state.data) + ' versi eksperimen' : 'Perjalanan rasa dimulai di sini';
+    $('collection-caption').textContent = recipes.length ? recipes.length + ' resep · ' + countVersions(state.data) + ' versi eksperimen' : 'Mulai dari satu resep dulu';
     $('empty-state').hidden = recipes.length !== 0;
     $('home-view').classList.toggle('has-recipes', recipes.length !== 0);
     $('recipe-list').innerHTML = recipes.map(recipe => {
@@ -358,7 +358,7 @@
     $('detail-subtitle').textContent = [version.beans || 'Biji kopi belum dicatat', formatDate(version.date)].join(' · ');
     $('detail-method').textContent = CATEGORIES[version.category];
     $('compare-button').disabled = recipe.versions.length < 2;
-    $('compare-button').title = recipe.versions.length < 2 ? 'Buat versi berikutnya untuk mulai membandingkan.' : '';
+    $('compare-button').title = recipe.versions.length < 2 ? 'Bikin satu versi lagi biar bisa dibandingkan.' : '';
     $('compare-help').hidden = recipe.versions.length >= 2;
     $('version-tabs').innerHTML = recipe.versions.map(item => '<button type="button" class="version-tab' + (item.id === version.id ? ' is-active' : '') + '" aria-pressed="' + (item.id === version.id) + '" data-version="' + escape(item.id) + '">V' + item.number + '<span>' + escape(formatDate(item.date)) + '</span></button>').join('');
     const unit = (value, suffix) => value === null ? 'Belum dicatat' : formatNumber(value) + ' ' + suffix;
@@ -369,7 +369,7 @@
       const meter = value === null ? '' : '<span class="score-meter" aria-hidden="true">' + Array.from({ length: 5 }, (_, index) => '<span class="' + (index < value ? 'is-filled' : '') + '"></span>').join('') + '</span>';
       return '<div class="score-tile' + (key === 'overall' ? ' is-overall' : '') + '"><span class="score-name">' + escape(label) + '</span><strong class="score-value">' + (value === null ? '<span class="score-unrated">Belum dinilai</span>' : value + '<small> / 5</small>') + '</strong>' + meter + '</div>';
     }).join('');
-    $('detail-content').innerHTML = '<div class="detail-grid"><section class="detail-card"><h2>Detail seduhan <span class="version-badge">V' + version.number + '</span></h2><dl class="detail-list">' + rows.map(([label, value]) => '<div><dt>' + escape(label) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl></section><section class="detail-card"><h2>Karakter rasa</h2><div class="score-summary">' + scores + '</div><p class="score-hint">1 = rendah, 5 = tinggi. Intensitas bukan penilaian baik atau buruk. Nilai keseluruhan adalah preferensi Anda.</p></section>' + notes('Tasting notes', version.tastingNotes) + notes('Langkah / catatan proses', version.process) + notes('Bahan tambahan', version.ingredients) + '</div>';
+    $('detail-content').innerHTML = '<div class="detail-grid"><section class="detail-card"><h2>Detail seduhan <span class="version-badge">V' + version.number + '</span></h2><dl class="detail-list">' + rows.map(([label, value]) => '<div><dt>' + escape(label) + '</dt><dd>' + escape(value) + '</dd></div>').join('') + '</dl></section><section class="detail-card"><h2>Karakter rasa</h2><div class="score-summary">' + scores + '</div><p class="score-hint">1 = rendah, 5 = tinggi. Intensitas bukan soal enak atau nggak. Nilai keseluruhan: seberapa cocok rasanya di lidah gw.</p></section>' + notes('Tasting notes', version.tastingNotes) + notes('Langkah / catatan proses', version.process) + notes('Bahan tambahan', version.ingredients) + '</div>';
   }
   function renderCompare() {
     const { recipe } = selected();
@@ -378,7 +378,7 @@
     if (!a || !b) return;
     const rows = compareVersions(a, b);
     const differences = rows.filter(row => row.different).length;
-    $('comparison-summary').textContent = a.id === b.id ? 'Anda memilih versi yang sama. Pilih versi lain untuk menemukan perbedaan.' : differences ? differences + ' bagian berbeda antara V' + a.number + ' dan V' + b.number + '.' : 'Belum ada perbedaan isi antara kedua versi ini.';
+    $('comparison-summary').textContent = a.id === b.id ? 'Ini versi yang sama. Pilih versi lain buat lihat bedanya.' : differences ? differences + ' bagian berbeda antara V' + a.number + ' dan V' + b.number + '.' : 'Isi kedua versi ini masih sama.';
     const visible = rows.filter(row => state.compareFilter !== 'different' || row.different);
     $('comparison-empty').hidden = visible.length !== 0;
     $('comparison-list').hidden = visible.length === 0;
@@ -398,7 +398,7 @@
     clearComparison();
     const { recipe } = selected();
     if (recipe.versions.length < 2) return false;
-    $('compare-subtitle').textContent = latest(recipe).name + ' · Bagian yang berubah diberi penanda.';
+    $('compare-subtitle').textContent = latest(recipe).name + ' · Yang berubah ditandai.';
     const options = recipe.versions.map(version => '<option value="' + escape(version.id) + '">V' + version.number + ' · ' + escape(formatDate(version.date)) + '</option>').join('');
     $('compare-left').innerHTML = options; $('compare-right').innerHTML = options;
     $('compare-left').value = recipe.versions.some(version => version.id === leftId) ? leftId : recipe.versions[Math.max(0, recipe.versions.length - 2)].id;
@@ -414,7 +414,7 @@
   function updateRatio() {
     let value = null;
     try { value = ratio(parseDecimal($('coffee-grams').value), parseDecimal($('water-ml').value)); } catch { /* Keep the hint while typing. */ }
-    $('ratio-preview').textContent = value ? 'Rasio kopi : air  ' + value + ' · Bahan tambahan tidak dihitung.' : 'Rasio kopi : air akan muncul saat dosis dan air terisi.';
+    $('ratio-preview').textContent = value ? 'Rasio kopi : air  ' + value + ' · Bahan tambahan nggak ikut dihitung.' : 'Isi dosis kopi dan air buat lihat rasio.';
   }
   const fieldIds = { name: 'recipe-name', date: 'brew-date', category: 'category', tool: 'tool', beans: 'beans', coffeeGrams: 'coffee-grams', waterMl: 'water-ml', temperatureC: 'temperature', grind: 'grind', process: 'process', ingredients: 'ingredients', tastingNotes: 'tasting-notes' };
   function clearFormErrors() {
@@ -446,17 +446,17 @@
     }
     const number = mode === 'new' ? 1 : mode === 'edit' ? source.number : Math.max(...selected().recipe.versions.map(version => version.number)) + 1;
     $('editor-version').textContent = 'V' + number;
-    $('editor-eyebrow').textContent = mode === 'new' ? 'EKSPERIMEN PERTAMA' : mode === 'edit' ? 'PERBAIKI CATATAN VERSI INI' : 'SATU LANGKAH LEBIH DEKAT';
-    $('editor-title').textContent = mode === 'new' ? 'Catat seduhan baru.' : mode === 'edit' ? 'Perbarui eksperimen V' + number + '.' : 'Racik eksperimen V' + number + '.';
-    $('save-button').textContent = mode === 'edit' ? 'Simpan perubahan' : 'Simpan eksperimen';
+    $('editor-eyebrow').textContent = mode === 'new' ? 'MULAI NGULIK' : mode === 'edit' ? 'RAPIKAN CATATAN' : 'COBA VERSI BARU';
+    $('editor-title').textContent = mode === 'new' ? 'Catat hasil seduhan.' : mode === 'edit' ? 'Rapikan catatan V' + number + '.' : 'Coba racikan V' + number + '.';
+    $('save-button').textContent = mode === 'edit' ? 'Simpan perubahan' : 'Simpan catatan';
     state.dirty = false; updateRatio(); showView('editor', options);
   }
   function readForm() {
     const fields = {};
     for (const [key, id] of Object.entries(fieldIds)) fields[key] = $(id).value.trim();
-    if (!fields.name) fail('Isi nama resep terlebih dahulu.', 'recipe-name');
-    if (!Object.hasOwn(CATEGORIES, fields.category)) fail('Pilih kategori seduhan.', 'category');
-    if ($('brew-date').validity.badInput) fail('Tanggal seduh tidak valid.', 'brew-date');
+    if (!fields.name) fail('Isi nama resep dulu.', 'recipe-name');
+    if (!Object.hasOwn(CATEGORIES, fields.category)) fail('Pilih dulu kategori seduhannya.', 'category');
+    if ($('brew-date').validity.badInput) fail('Tanggal seduhnya belum valid. Cek lagi, ya.', 'brew-date');
     for (const [key, label, positive] of [['coffeeGrams', 'Dosis kopi', true], ['waterMl', 'Air seduh', true], ['temperatureC', 'Suhu air', false]]) {
       try { fields[key] = parseDecimal(fields[key], label, { positive }); }
       catch (error) { error.field = fieldIds[key]; throw error; }
@@ -464,9 +464,9 @@
     const ids = ['duration-hours', 'duration-minutes', 'duration-seconds'];
     const values = ids.map((id, index) => {
       const text = $(id).value;
-      if ($(id).validity.badInput || (text && !/^\d+$/.test(text))) fail('Isi durasi dengan bilangan bulat nol atau lebih.', id);
+      if ($(id).validity.badInput || (text && !/^\d+$/.test(text))) fail('Isi durasi pakai angka bulat, mulai dari 0.', id);
       const value = text === '' ? 0 : Number(text);
-      if (!Number.isSafeInteger(value) || (index > 0 && value > 59)) fail(index > 0 ? 'Menit dan detik harus berada antara 0–59. Gunakan kolom Jam untuk durasi yang lebih panjang.' : 'Durasi jam tidak valid.', id);
+      if (!Number.isSafeInteger(value) || (index > 0 && value > 59)) fail(index > 0 ? 'Menit dan detik cuma 0–59. Kalau lebih lama, pakai kolom Jam.' : 'Angka jamnya belum valid. Pakai angka bulat mulai dari 0.', id);
       return value;
     });
     fields.durationSeconds = ids.every(id => $(id).value === '') ? null : values[0] * 3600 + values[1] * 60 + values[2];
@@ -502,7 +502,7 @@
       const result = persist(next);
       if (editor.mode === 'new') { const recipe = result.recipes[result.recipes.length - 1]; state.recipeId = recipe.id; state.versionId = latest(recipe).id; }
       else { state.recipeId = editor.recipeId; state.versionId = editor.mode === 'duplicate' ? latest(result.recipes.find(recipe => recipe.id === editor.recipeId)).id : editor.versionId; }
-      state.dirty = false; renderHome(); renderDetail(); showView('detail', { record: 'replace' }); notify('Eksperimen V' + selected().version.number + ' tersimpan di browser ini.');
+      state.dirty = false; renderHome(); renderDetail(); showView('detail', { record: 'replace' }); notify('Catatan V' + selected().version.number + ' tersimpan di browser ini.');
     } catch (error) { formError(error); }
   }
   function renderBackup() {
@@ -511,8 +511,8 @@
     $('export-raw-button').hidden = state.corruptRaw === null;
     try {
       const last = root.localStorage.getItem(BACKUP_KEY);
-      $('last-backup').textContent = last && !Number.isNaN(Date.parse(last)) ? 'Unduhan terakhir dimulai: ' + new Date(last).toLocaleString('id-ID') + '. Periksa file di Downloads.' : 'File cadangan akan diunduh ke HP Anda.';
-    } catch { $('last-backup').textContent = 'File cadangan akan diunduh ke HP Anda.'; }
+      $('last-backup').textContent = last && !Number.isNaN(Date.parse(last)) ? 'Unduhan terakhir dimulai: ' + new Date(last).toLocaleString('id-ID') + '. Cek file di Downloads.' : 'File cadangan bisa diunduh ke HP.';
+    } catch { $('last-backup').textContent = 'File cadangan bisa diunduh ke HP.'; }
   }
   function download(text, filename) {
     const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
@@ -525,13 +525,13 @@
     const file = event.target.files[0];
     if (!file) { $('import-summary').hidden = true; return; }
     const token = file;
-    $('import-summary').textContent = 'Memeriksa file…'; $('import-summary').hidden = false; $('import-summary').dataset.tone = 'info';
+    $('import-summary').textContent = 'Lagi cek file…'; $('import-summary').hidden = false; $('import-summary').dataset.tone = 'info';
     try {
-      if (file.size > 5 * 1024 * 1024) fail('File terlalu besar. Batas cadangan tahap awal adalah 5 MB.');
+      if (file.size > 5 * 1024 * 1024) fail('File terlalu besar. Batasnya 5 MB.');
       const data = parseBackup(await file.text());
       if ($('import-file').files[0] !== token) return;
       state.pending = data;
-      $('import-summary').textContent = 'File valid: ' + data.recipes.length + ' resep dan ' + countVersions(data) + ' versi. Seluruh catatan saat ini akan diganti. Cadangkan terlebih dahulu jika masih diperlukan.';
+      $('import-summary').textContent = 'File siap dipulihkan: ' + data.recipes.length + ' resep dan ' + countVersions(data) + ' versi. Kalau dilanjutkan, seluruh catatan saat ini akan diganti dengan isi file ini. Unduh cadangan catatan yang sekarang dulu kalau masih ingin disimpan.';
       $('import-summary').dataset.tone = 'success'; $('restore-button').disabled = false;
     } catch (error) {
       if ($('import-file').files[0] !== token) return;
@@ -541,12 +541,12 @@
   async function restore() {
     if (!state.pending) return;
     const data = state.pending;
-    if (!await ask('Ganti seluruh catatan?', 'Pulihkan ' + data.recipes.length + ' resep dan ' + countVersions(data) + ' versi dari file ini. Seluruh catatan saat ini akan diganti. Unduh cadangan terlebih dahulu jika belum memilikinya.', 'Ya, pulihkan')) return;
+    if (!await ask('Ganti seluruh catatan?', 'Pulihkan ' + data.recipes.length + ' resep dan ' + countVersions(data) + ' versi dari file ini. Seluruh catatan saat ini akan diganti dengan isi file ini. Unduh cadangan catatan yang sekarang dulu kalau masih ingin disimpan.', 'Ganti dan pulihkan')) return;
     try {
       persist(data, true); state.pending = null; state.recipeId = null; state.versionId = null;
       clearComparison(); state.compareFilter = 'all';
       $('import-file').value = ''; $('import-summary').hidden = true; $('restore-button').disabled = true;
-      renderHome(); renderBackup(); notify('Cadangan berhasil dipulihkan. Semua resep dan skor tersedia di koleksi.');
+      renderHome(); renderBackup(); notify('Cadangan berhasil dipulihkan. Resep, versi, dan skor sudah ada di koleksi.');
     } catch (error) { notify(error.message + ' Catatan lama belum diubah.', 'error'); }
   }
   async function navigate(target) {
@@ -632,13 +632,13 @@
         const now = new Date().toISOString();
         download(serializeBackup(state.data, now), 'coffee-brew-lab-' + now.replace(/[:.]/g, '-') + '.json');
         try { root.localStorage.setItem(BACKUP_KEY, now); } catch { /* Export remains usable if only metadata fails. */ }
-        renderBackup(); notify('Unduhan cadangan dimulai. Periksa folder Downloads di HP Anda.');
+        renderBackup(); notify('Unduhan cadangan dimulai. Cek file di folder Downloads.');
       } catch (error) { notify(error.message, 'error'); }
     });
     $('export-raw-button').addEventListener('click', () => { if (state.corruptRaw !== null) download(state.corruptRaw, 'coffee-brew-lab-data-perlu-diperiksa.json'); });
     $('import-file').addEventListener('change', importFile); $('restore-button').addEventListener('click', restore);
     root.addEventListener('beforeunload', event => { if (state.dirty) { event.preventDefault(); event.returnValue = ''; } });
-    root.addEventListener('storage', event => { if (event.key === STORAGE_KEY || event.key === null) notify('Catatan diubah dari tab lain. Muat ulang halaman sebelum melanjutkan. Jika ada isian yang belum disimpan, salin terlebih dahulu.', 'info'); });
+    root.addEventListener('storage', event => { if (event.key === STORAGE_KEY || event.key === null) notify('Catatan berubah di tab lain. Salin dulu isian yang belum disimpan, lalu muat ulang halaman sebelum lanjut.', 'info'); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })(typeof globalThis !== 'undefined' ? globalThis : this);
